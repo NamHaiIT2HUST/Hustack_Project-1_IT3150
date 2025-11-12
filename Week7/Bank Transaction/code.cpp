@@ -62,7 +62,6 @@ CẦN XỬ LÝ 5 LOẠI TRUY VẤN:
 
 ───────────────────────────── CÀI ĐẶT ─────────────────────────────
 */
-
 unordered_map<string, vector<string>> adj;
 unordered_map<string, long long> total_from;
 set<string> all_accounts;
