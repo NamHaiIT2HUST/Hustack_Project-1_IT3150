@@ -62,7 +62,6 @@ vector<ll> prefix_sum;
 vector<Order> orders;
 ll total_revenue = 0;
 
-// ✅ Chuyển "HH:MM:SS" → giây để dễ so sánh
 int convertTime(const string &t) {
     int h = stoi(t.substr(0, 2));
     int m = stoi(t.substr(3, 2));
@@ -70,7 +69,6 @@ int convertTime(const string &t) {
     return h * 3600 + m * 60 + s;
 }
 
-// ✅ Đọc danh sách đơn hàng
 void readOrders() {
     string line;
     while (getline(cin, line)) {
@@ -93,13 +91,11 @@ void readOrders() {
 
     sort(time_revenue.begin(), time_revenue.end());
 
-    // ✅ Tiền xử lý prefix sum cho phần truy vấn theo thời gian
     prefix_sum.resize(time_revenue.size() + 1, 0);
     for (int i = 0; i < (int)time_revenue.size(); ++i)
         prefix_sum[i + 1] = prefix_sum[i] + time_revenue[i].second;
 }
 
-// ✅ Tính tổng doanh thu trong khoảng thời gian [from, to]
 ll revenueInPeriod(int fromSec, int toSec) {
     auto l = lower_bound(time_revenue.begin(), time_revenue.end(), make_pair(fromSec, 0));
     auto r = upper_bound(time_revenue.begin(), time_revenue.end(), make_pair(toSec, INT_MAX));
@@ -110,7 +106,6 @@ ll revenueInPeriod(int fromSec, int toSec) {
     return prefix_sum[rightIdx] - prefix_sum[leftIdx];
 }
 
-// ✅ Xử lý từng truy vấn
 void processQuery(const string &queryLine) {
     stringstream ss(queryLine);
     string query;
@@ -141,7 +136,6 @@ void processQuery(const string &queryLine) {
     }
 }
 
-// ✅ Đọc và xử lý tất cả truy vấn
 void handleQueries() {
     string line;
     while (getline(cin, line)) {
@@ -151,13 +145,12 @@ void handleQueries() {
     }
 }
 
-// ✅ MAIN
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    readOrders();     // đọc toàn bộ đơn hàng
-    handleQueries();  // xử lý tất cả truy vấn
+    readOrders();   
+    handleQueries();  
 
     return 0;
 }
