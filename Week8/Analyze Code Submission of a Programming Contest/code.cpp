@@ -26,7 +26,6 @@ TRUY VẤN:
 - Khoảng thời gian: dùng binary search trên mảng đã sort
 */
 
-// Hàm chuyển HH:MM:SS → số giây
 int timeToSec(const string &t) {
     int h, m, s;
     sscanf(t.c_str(), "%d:%d:%d", &h, &m, &s);
@@ -37,14 +36,12 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    // --- Khai báo dữ liệu ---
     long long total_submissions = 0;
     long long total_error = 0;
     unordered_map<string, int> err_by_user;
     unordered_map<string, unordered_map<string, int>> max_point;
-    vector<int> times; // lưu timepoints (dạng giây)
-
-    // --- Đọc block 1 (submission data) ---
+    vector<int> times; 
+    
     string line;
     while (getline(cin, line)) {
         if (line == "#") break;
@@ -62,15 +59,12 @@ int main() {
             err_by_user[user]++;
         }
 
-        // lưu điểm tối đa cho mỗi user-problem
         int &best = max_point[user][prob];
         if (point > best) best = point;
     }
 
-    // sort thời gian để xử lý binary search
     sort(times.begin(), times.end());
 
-    // --- Đọc block 2 (queries) ---
     while (getline(cin, line)) {
         if (line == "#") break;
         if (line.empty()) continue;
